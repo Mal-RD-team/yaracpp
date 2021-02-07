@@ -32,6 +32,7 @@ if(NOT TARGET yara)
 			/p:Configuration=$<CONFIGURATION>
 			/p:PlatformToolset=${CMAKE_VS_PLATFORM_TOOLSET}
 			/p:WindowsTargetPlatformVersion=${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}
+			/t:restore
 			${YARA_SOLUTION})
 	else()
 		set(YARA_LIBRARY_DIR   ${YARA_DIR}/libyara/.libs)
@@ -40,8 +41,8 @@ if(NOT TARGET yara)
 
 	ExternalProject_Add(yara
 		PREFIX "yara"
-		URL https://github.com/VirusTotal/yara/archive/v4.0.5.zip
-		URL_HASH SHA256=F67C4E445000FE9718770EC3B6874E1FB1DB1A3C1D77D311BFBBBAA3B96533C8
+		URL https://github.com/VirusTotal/yara/archive/v3.11.0.zip
+		URL_HASH SHA256=C99345D3A31C59B015AF0C331C3ABDF342C6FC1BB83ECBF8BB32F1C194D045D9
 		DOWNLOAD_NAME yara.zip
 		BUILD_IN_SOURCE 1
 		CONFIGURE_COMMAND ""
