@@ -23,7 +23,7 @@ if(NOT TARGET yara)
 			set(YARA_LIBRARY_NAME "${YARA_LIBRARY_NAME}32")
 		endif()
 
-		set(YARA_WIN_DIR       ${YARA_DIR}/windows/vs2015)
+		set(YARA_WIN_DIR       ${YARA_DIR}/windows/vs2017)
 		set(YARA_SOLUTION      ${YARA_WIN_DIR}/yara.sln)
 		set(YARA_LIBRARY_DIR   ${YARA_WIN_DIR}/libyara/$<CONFIGURATION>)
 		set(YARA_BUILD_COMMAND "${CMAKE_VS_MSBUILD_COMMAND}"
@@ -32,8 +32,9 @@ if(NOT TARGET yara)
 			/p:Configuration=$<CONFIGURATION>
 			/p:PlatformToolset=${CMAKE_VS_PLATFORM_TOOLSET}
 			/p:WindowsTargetPlatformVersion=${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION}
-			/t:restore
 			${YARA_SOLUTION})
+     
+               
 	else()
 		set(YARA_LIBRARY_DIR   ${YARA_DIR}/libyara/.libs)
 		set(YARA_BUILD_COMMAND make -j${CPUS})
@@ -45,7 +46,7 @@ if(NOT TARGET yara)
 		URL_HASH SHA256=C99345D3A31C59B015AF0C331C3ABDF342C6FC1BB83ECBF8BB32F1C194D045D9
 		DOWNLOAD_NAME yara.zip
 		BUILD_IN_SOURCE 1
-		CONFIGURE_COMMAND ""
+		CONFIGURE_COMMAND COMMAND nuget.exe restore ${YARA_SOLUTION}
 		BUILD_COMMAND ""
 			${YARA_BUILD_COMMAND}
 		INSTALL_COMMAND ""
