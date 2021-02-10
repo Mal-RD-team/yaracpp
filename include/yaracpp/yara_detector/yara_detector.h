@@ -92,6 +92,8 @@ class YaraDetector
 		bool analyze(std::vector<std::uint8_t> &bytes, bool storeAllRules = false);
 		const std::vector<YaraRule>& getDetectedRules() const;
 		const std::vector<YaraRule>& getUndetectedRules() const;
+		bool clearCachedResults();
+
 		/// @}
 };
 

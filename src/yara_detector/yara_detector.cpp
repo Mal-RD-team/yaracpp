@@ -337,6 +337,21 @@ const std::vector<YaraRule>& YaraDetector::getUndetectedRules() const
 	return undetectedRules;
 }
 
+/*
+* @brief clear previous DetectedRules 
+* @return true if successull
+*/
+bool YaraDetector::clearCachedResults() {
+	try {
+		detectedRules.clear();
+		undetectedRules.clear();
+		return true;
+	}
+	catch (std::exception& ex) {
+		return false;
+	}
+}
+
 /**
  * Analyze input sequence
  * @param value Value to analyze
