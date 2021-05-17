@@ -58,7 +58,8 @@ bool scan(YR_RULES* rules, YR_CALLBACK_FUNC callback, YaraDetector::CallbackSett
 }
 
 /**
- * Constructor
+ * Constructor 
+ * //TODO: We can just remove the files vector.
  */
 YaraDetector::YaraDetector() : compiler(nullptr), files(), detectedRules(), undetectedRules(), textFilesRules(nullptr),
 	precompiledRules(), stateIsValid(true), needsRecompilation(true)
@@ -281,7 +282,12 @@ bool YaraDetector::addRuleFile(const std::string &pathToFile, const std::string 
 			return false;
 		}
 
-		files.push_back(file);
+		/*so far the module seems to do nothing with the vector, so we will keep
+		* the vectory empty any maybe even completely remove it if we do not find a useful usecase for it.
+		*/
+
+		//files.push_back(file); 
+		fclose(file);
 		needsRecompilation = true;
 	}
 
